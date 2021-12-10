@@ -1,15 +1,15 @@
 import express from "express";
 import { Server } from "colyseus";
 import { monitor } from "@colyseus/monitor";
-
+import http from 'http';
 import { ArenaRoom } from "./rooms/ArenaRoom";
 
 const port = 2567;
 const app = express()
 app.use(express.json())
 
-const gameServer = new Server();
-gameServer.define('ArenaRoom', ArenaRoom);
+const server = http.createServer(app);
+const gameServer = new Server({server,});
 app.use("/colyseus", monitor());
 
 gameServer.listen(port);

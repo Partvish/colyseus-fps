@@ -10,6 +10,7 @@ app.use(express.json())
 
 const server = http.createServer(app);
 const gameServer = new Server({server,});
+gameServer.define('ArenaRoom', ArenaRoom);
 app.use("/colyseus", monitor());
 
 gameServer.listen(port);
